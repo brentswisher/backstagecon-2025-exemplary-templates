@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			.reveal section.image img {
+				max-width:100%;
+			}
+			.reveal section.image90 img {
+				max-width:90%;
+			}
+			.reveal section.image80 img {
+				max-width:80%;
+			}
+			.reveal section.image70 img {
+				max-width:70%;
+			}
+			.reveal section.image60 img {
+				max-width:60%;
+			}
+			.reveal section.image50 img {
+				max-width:50%;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+				text-transform: none;
+			}
+			.process-flow {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				justify-content: center;
+				max-width: 900px;
+				margin: 0 auto;
+				font-size: 1.75rem;
+				gap: 1rem;			
+			}
+			.process-flow-item { 
+				align-items: center;
+				aspect-ratio: 1.5 / 1;
+				background: #242424;
+				border-radius: 10px;
+				border: 2px solid #444;
+				display: flex;
+				font-size: 1.25rem;
+				justify-content: center;
+				min-height: 120px;
+				padding: 1.5rem;
+				text-align: center;
+				transition: all 0.3s ease-in-out;
+			}
+	
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-gradient="linear-gradient(to right bottom, var(--pharos-color-night-blue-base) 55%, var(--pharos-color-living-coral-base));">
+					<h1>Exemplar-y<br />Software Templates</h1>
+					<h3>Brent Swisher</h3>
+					<h4>BackstageCon 2025</h4>
+				</section>
+				<section >
+					<div class="intro">
+						<h2>About Me</h2>
+						<h4>Brent Swisher</h4>
+						<p>Senior Software Engineer</p>
+						<p>
+							<a href="https://github.com/brentswisher">@brentswisher</a> | <a href="https://brentswisher.com">brentswisher.com</a>
+						</p>
+					</div>
+				</section>
+				<section>
+					<div class="intro">
+						<img src="img/ithaka-logo.png" alt="Ithaka Logo" />
+						<p>
+							We are a nonprofit with a mission to improve access to knowledge and education 
+							for people around the world.
+						</p>
+						<p>
+							<a href="https://ithaka.org">ithaka.org</a>
+						</p>
+				</section>
+				<section>Let's talk about starting a project</section>
+				<section class="image80" data-transition="slide-in fade-out">
+					<h2>Micro-frontends</h2>
+					<img src="img/jstor.png" alt="Screenshot of JSTOR website showing an image" />
+				</section>
+				<section class="image80" data-transition="fade-in">
+					<h2>Micro-frontends</h2>
+					<img src="img/mfes.png" alt="Screenshot of JSTOR website showing an image with boxes overlayed highlighting that it is actually made up of several different microfrontends" />
+				</section>
+				<section>
+					<h2>Github Repository Templates</h2>
+					<img src="img/github_template.png" alt="Screenshot of a GitHub template repository" />
+				</section>
+				<section>
+					<pre>
+						<code data-trim data-line-numbers="6-7" class="language-yaml">
+## Usage
+- Create a copy of this template repository and 
+  name it mfe-&lt;your MFE name with hyphens&gt;.
+- Clone your new repository.
+- Install the dependencies using yarn install.
+- Search for all instances of the word TODO
+  and follow the instructions.
+- Run the tests to ensure everything is working as expected.
+						</code>
+					</pre>
+				</section>
+				<section class="image80">
+					<h2>Backstage Templates</h2>
+					<img src="img/backstage_template.png" alt="Screenshot of the Backstage template UI" />
+				</section>
+				<section class="image80">
+					<h3>What's the problem?</h3>
+					<pre class="fragment fade-in">
+						<code data-trim>
+"name": "${{values.component_id}}",
+						</code>
+					</pre>
+					<pre class="fragment fade-in">
+						<code data-trim>
+local: /skeleton (main)]$ yarn
+	yarn install v1.22.22
+	error package.json: Name contains illegal characters
+	info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.
+						</code>
+					</pre>
+					<pre class="fragment fade-in">
+						<code data-trim>
+yarn build
+						</code>
+					</pre>
+					<pre class="fragment fade-in">
+						<code data-trim>
+ERROR in [entry] [initial] remoteEntry.js
+Library name base (mfe${{ values.nameKebabCase }}) must be a 
+valid identifier when using a var declaring library type.
+					</code>
+				</pre>
+				</section>
+				<!-- Highlight the error -->
+				
+				<section>
+					<h2>Updating Templates is Hard</h2>
+					<div class="process-flow">
+						<div class="process-flow-item fragment fade-in">Run Backstage Locally</div>
+						<div class="process-flow-item fragment fade-in">Run Template</div>
+						<div class="process-flow-item fragment fade-in">Open "mfe-brent-update"</div>
+						<div class="process-flow-item fragment fade-in">Make Changes</div>
+						<div class="process-flow-item fragment fade-in">Test Changes</div>
+						<div class="process-flow-item fragment fade-in">Copy files back to the template</div>
+						<div class="process-flow-item fragment fade-in">Fix templated content</div>
+						<div class="process-flow-item fragment fade-in">Go back to Backstage</div>
+						<div class="process-flow-item fragment fade-in">Run Template Again</div>
+						<div class="process-flow-item fragment fade-in">Verify your changes</div>
+						<div class="process-flow-item fragment fade-in">Make sure your name isn't still in it</div>
+						<div class="process-flow-item fragment fade-in">Open PR and merge</div>
+					</div>
+				</section>
+				<section>
+					<h1>😅</h1>
+					It's pretty hard to contribute
+				</section>
+				<section>
+					<h2>So, what to do...</h2>
+				</section>
+				<!-- The Solution -->
+				<section>
+					<h2>What is a template...</h2>
+					<img src="img/thinking.png" alt="Meme of winnie the pooh thinking What if a template wasn't a template at all?" />
+					<h2>...wasn't a template at all</h2>
+				</section>
+				<section class="image80">
+					<h2>Exemplar Templates</h2>
+					<img src="img/exemplar_template.png" alt="Screenshot of the Backstage template UI" />
+				</section>
+				<section>
+					<h2>How's it work?</h2>
+				</section>
+				<section>
+					<h2>Pull in the Exemplar</h2>
+					<pre>
+						<code data-trim data-line-numbers="5" class="language-yaml">
+- id: fetch-template-repository
+	name: Fetch Base
+	action: fetch:template
+	input:
+		url: https://github.com/ithaka/vue-exemplar/tree/main
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Update the file content</h2>
+					<pre>
+						<code data-trim data-line-numbers="3|6-8|9-11|12-14" class="language-yaml">
+- id: replace-template-strings
+	name: Replace template string values
+	action: blueprint:template-string-replace
+	input:
+		replacementStrings:
+			name-kebab-case:
+				searchTerm: vue-template-exemplar
+				replacementTerm: ${{ name.kebabCase }}
+			nameCamelCase:
+				searchTerm: vueTemplateExemplar
+				replacementTerm: ${{ name.camelCase }}
+			owner:
+				searchTerm: replace-with-project-owner
+				replacementTerm: ${{ parameters.team.name }}					
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>We can rename files too!</h2>
+					<pre>
+						<code data-trim data-line-numbers="3|7-9" class="language-yaml">
+- id: replace-template-strings
+	name: Replace template string values
+	action: blueprint:template-string-replace
+	input:
+		replacementStrings:		
+			# Replace templates files
+			catalogFile:
+				searchTerm: project-catalog-info
+				replacementTerm: catalog-info
+			READMEFile:
+				searchTerm: project-README
+				replacementTerm: README							
+						</code>
+					</pre>
+				</section>
+
+				<!--- The Outcomes ---> 
+				<section>
+					<h2>Updating Templates is <s>Hard</s> Easy!</h2>
+					<div class="process-flow">
+						<div class="process-flow-item fragment fade-in">Make the change</div>
+						<div class="process-flow-item fragment fade-in">Test the change</div>
+						<div class="process-flow-item fragment fade-in">Deploy the change</div>
+						<div class="process-flow-item fragment fade-in">Open PR and merge</div>
+					</div>
+				</section>
+				<section>
+					<h2>What does it enable us to do?</h2>
+				</section>
+				<section>
+					<h2>Better Tooling</h2>
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+						<div class="fragment">
+							<h4>Renovate</h4>
+							<img src="img/renovate.png" alt="Screenshot of a Renovate dependency dashboard" />
+						</div>
+						<div class="fragment">
+							<h4>Soundcheck</h4>
+							<img src="img/soundcheck.png" alt="Screenshot of a Soudncheck scorecards for MFEs" />
+						</div>
+					</div>
+				</section>
+				<section>
+					<h2>Better Collaboration</h2>
+					<h4 class="fragment">Faster Onboarding</h4>
+					<h4 class="fragment">Community Contributions</h4>
+					<img class="fragment" src="img/contributions.png" alt="Screenshot of slack conversation showing cross-team contributions to templates" />
+				</section>
+				
+				<section>
+					<h3>Impact at ITHAKA</h3>
+					<p class="fragment fade-in">🔥 Merge 18x more PRs in exemplars </p>
+					<p class="fragment fade-in">🕓 Each templates saves ~4 hours at project startup</p>
+				</section>
+				
+				<!--- Wrap up ---> 
+				<section><h1>Questions?</h1></section>
+				<section>
+					<h2>Thank You!</h2>
+					<p>Slides available: </p>
+					<p>Action source code: </p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
