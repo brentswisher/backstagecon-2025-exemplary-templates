@@ -149,24 +149,22 @@ Library name base (mfe${{ values.nameKebabCase }}) must be a
 valid identifier when using a var declaring library type.
 					</code>
 				</pre>
-				</section>
-				<!-- Highlight the error -->
-				
+				</section>				
 				<section>
-					<h2>Updating Templates is Hard</h2>
+					<h2>Updating Templates</h2>
 					<div class="process-flow">
-						<div class="process-flow-item fragment fade-in">Run Backstage Locally</div>
-						<div class="process-flow-item fragment fade-in">Run Template</div>
-						<div class="process-flow-item fragment fade-in">Open "mfe-brent-update"</div>
-						<div class="process-flow-item fragment fade-in">Make Changes</div>
-						<div class="process-flow-item fragment fade-in">Test Changes</div>
-						<div class="process-flow-item fragment fade-in">Copy files back to the template</div>
-						<div class="process-flow-item fragment fade-in">Fix templated content</div>
-						<div class="process-flow-item fragment fade-in">Go back to Backstage</div>
-						<div class="process-flow-item fragment fade-in">Run Template Again</div>
-						<div class="process-flow-item fragment fade-in">Verify your changes</div>
-						<div class="process-flow-item fragment fade-in">Make sure your name isn't still in it</div>
-						<div class="process-flow-item fragment fade-in">Open PR and merge</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="1">Run Backstage Locally</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="2">Run Template</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="3">Open "mfe-brent-update"</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="4">Make Changes</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="5">Test Changes</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="6">Copy files back to the template</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="7">Fix templated content</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="8">Go back to Backstage</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="9">Run Template Again</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="10">Verify your changes</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="11">Make sure your name isn't still in it</div>
+						<div class="process-flow-item fragment fade-in" data-fragment-index="12">Open PR and merge</div>
 					</div>
 				</section>
 				<section>
@@ -176,10 +174,11 @@ valid identifier when using a var declaring library type.
 				<section>
 					<h2>So, what to do...</h2>
 				</section>
+				
 				<!-- The Solution -->
 				<section>
 					<h2>What is a template...</h2>
-					<img src="img/thinking.png" alt="Meme of winnie the pooh thinking What if a template wasn't a template at all?" />
+					<h1>🤔</h1>
 					<h2>...wasn't a template at all</h2>
 				</section>
 				<section class="image80">
@@ -189,15 +188,41 @@ valid identifier when using a var declaring library type.
 				<section>
 					<h2>How's it work?</h2>
 				</section>
+				
+				<section>
+					<h2>The custom action</h2>
+					<pre>
+						<code data-trim data-line-numbers="1|2|3|7,11" class="language-typescript">
+							const filePaths = getAllTemplateFiles(ctx.workspacePath);
+							filePaths.forEach((filePath) => {
+								const fileContent = fs.readFileSync(filePath).toString();
+								let replacementContent = fileContent;
+								let replacementFileName = filePath;
+								for (const replacement in stringReplacements) {
+									replacementFileName = replacementFileName.replaceAll(
+										stringReplacements[replacement].searchTerm,
+										stringReplacements[replacement].replacementTerm,
+										);
+										replacementContent = replacementContent.replaceAll(
+											stringReplacements[replacement].searchTerm,
+											stringReplacements[replacement].replacementTerm,
+											);
+										}					
+						</code>
+					</pre>
+					<p style="font-size:2rem">
+						<a href="">https://github.com/ithaka/backstage-template-string-replace-action</a>
+					</p>
+				</section>
 				<section>
 					<h2>Pull in the Exemplar</h2>
 					<pre>
 						<code data-trim data-line-numbers="5" class="language-yaml">
-- id: fetch-template-repository
-	name: Fetch Base
-	action: fetch:template
-	input:
-		url: https://github.com/ithaka/vue-exemplar/tree/main
+			- id: fetch-template-repository
+			name: Fetch Base
+			action: fetch:template
+			input:
+			url: https://github.com/ithaka/vue-exemplar/tree/main
 						</code>
 					</pre>
 				</section>
@@ -207,7 +232,7 @@ valid identifier when using a var declaring library type.
 						<code data-trim data-line-numbers="3|6-8|9-11|12-14" class="language-yaml">
 - id: replace-template-strings
 	name: Replace template string values
-	action: blueprint:template-string-replace
+	action: ithaka:template-string-replace
 	input:
 		replacementStrings:
 			name-kebab-case:
@@ -229,7 +254,7 @@ valid identifier when using a var declaring library type.
 						<code data-trim data-line-numbers="3|7-9" class="language-yaml">
 - id: replace-template-strings
 	name: Replace template string values
-	action: blueprint:template-string-replace
+	action: ithaka:template-string-replace
 	input:
 		replacementStrings:		
 			# Replace templates files
@@ -245,7 +270,7 @@ valid identifier when using a var declaring library type.
 
 				<!--- The Outcomes ---> 
 				<section>
-					<h2>Updating Templates is <s>Hard</s> Easy!</h2>
+					<h2>Updating Templates is Easy!</h2>
 					<div class="process-flow">
 						<div class="process-flow-item fragment fade-in">Make the change</div>
 						<div class="process-flow-item fragment fade-in">Test the change</div>
@@ -272,22 +297,25 @@ valid identifier when using a var declaring library type.
 				<section>
 					<h2>Better Collaboration</h2>
 					<h4 class="fragment">Faster Onboarding</h4>
-					<h4 class="fragment">Community Contributions</h4>
-					<img class="fragment" src="img/contributions.png" alt="Screenshot of slack conversation showing cross-team contributions to templates" />
+					<span class="fragment">
+						<h4>Community Contributions</h4>
+						<img src="img/contributions.png" alt="Screenshot of slack conversation showing cross-team contributions to templates" />
+					</span>
 				</section>
 				
 				<section>
 					<h3>Impact at ITHAKA</h3>
 					<p class="fragment fade-in">🔥 Merge 18x more PRs in exemplars </p>
-					<p class="fragment fade-in">🕓 Each templates saves ~4 hours at project startup</p>
+					<p class="fragment fade-in">🕓 Each template use saves ~4 hours</p>
 				</section>
 				
 				<!--- Wrap up ---> 
 				<section><h1>Questions?</h1></section>
 				<section>
 					<h2>Thank You!</h2>
-					<p>Slides available: </p>
-					<p>Action source code: </p>
+					<p>
+						<a href="https://brentswisher.github.io/backstagecon-2025/">https://brentswisher.github.io/backstagecon-2025/</a></p>
+					</p>
 				</section>
 			</div>
 		</div>
